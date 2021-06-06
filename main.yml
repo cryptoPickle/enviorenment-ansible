@@ -1,0 +1,6 @@
+- name: Setup Mac
+  vars_files:
+    - ./variables.yml
+  hosts: all
+  roles:
+    - npm
