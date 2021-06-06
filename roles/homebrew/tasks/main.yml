@@ -1,0 +1,6 @@
+- name: Install Homebrew Packages
+  homebrew:
+    name: "{{item.name | default(item)}}"
+    state: "{{item.state | default('present')}}"
+    path: /opt/homebrew/bin/brew
+  loop: "{{homebrew_packages}}"

@@ -1,3 +1,6 @@
 npm_packages:
   - name: jest
     state: latest
+
+homebrew_packages:
+  - htop
