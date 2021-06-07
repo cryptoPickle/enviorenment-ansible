@@ -5,5 +5,5 @@
     version: "{{item.version | default(omit)}}"
     global: true
     executable: "{{item.executable | default(omit)}}"
-  loop: "{{npm_packages}}"
+  with_items: "{{npm}}"
 

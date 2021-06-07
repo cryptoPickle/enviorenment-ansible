@@ -1,6 +1,37 @@
-npm_packages:
-  - name: jest
-    state: latest
+npm:
+  - jest
 
-homebrew_packages:
+taps:
+  - homebrew/core
+  - homebrew/cask
+
+brews:
   - htop
+  #  - mas
+  #  - awscli
+  #  - ripgrep
+  #  - terraform-docs
+  #  - bash
+  #  - gnu-sed
+  #  - python@3.8
+  #  - the_silver_searcher
+  #  - fzf
+  #  - hub
+  #  - terminal-notifier
+  #  - tmux
+  #  - jq
+  #  - neovim
+  #  - terraform
+  #  - tree
+  #  - gsed
+  #  - htop
+  #  - antibody
+
+
+homebrew_cask_dir: /Applications
+casks:
+  - docker
+  - iterm2
+  - postman 
+  - slack
+  
