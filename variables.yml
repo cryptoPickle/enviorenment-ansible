@@ -7,25 +7,25 @@ taps:
 
 brews:
   - htop
-  #  - mas
-  #  - awscli
-  #  - ripgrep
-  #  - terraform-docs
-  #  - bash
-  #  - gnu-sed
-  #  - python@3.8
-  #  - the_silver_searcher
-  #  - fzf
-  #  - hub
-  #  - terminal-notifier
-  #  - tmux
-  #  - jq
-  #  - neovim
-  #  - terraform
-  #  - tree
-  #  - gsed
-  #  - htop
-  #  - antibody
+  - mas
+  - awscli
+  - ripgrep
+  - terraform-docs
+  - bash
+  - gnu-sed
+  - python@3.8
+  - the_silver_searcher
+  - fzf
+  - hub
+  - terminal-notifier
+  - tmux
+  - jq
+  - neovim
+  - terraform
+  - tree
+  - gsed
+  - htop
+  - antibody
 
 
 homebrew_cask_dir: /Applications

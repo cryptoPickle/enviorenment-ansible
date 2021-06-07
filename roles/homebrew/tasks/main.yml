@@ -22,10 +22,14 @@
   with_items: "{{taps}}"
 
 ## Hack for installing casks, dependency for homebrew is failing
-- name: Install Cask Packages
-  shell:  brew install --cask "{{item}}"
-  loop: "{{casks}}"
-  register: cask
+- name: Install Cask Block
+  block:
+    - name: Install Cask
+      shell:  brew install --cask "{{item}}"
+      loop: "{{casks}}"
+      register: cask
+  rescue:
+    - name: Print when errors
+      debug:
+        msg: "rescued already installed"
 
-- debug:
-    msg: "{{cask}}"
