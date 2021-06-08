@@ -7,31 +7,35 @@ taps:
 
 brews:
   - htop
-  - mas
-  - awscli
-  - ripgrep
-  - terraform-docs
-  - bash
-  - gnu-sed
-  - python@3.8
-  - the_silver_searcher
-  - fzf
-  - hub
-  - terminal-notifier
-  - tmux
-  - jq
-  - neovim
-  - terraform
-  - tree
-  - gsed
-  - htop
-  - antibody
+    #  - mas
+    #  - awscli
+    #  - ripgrep
+    #  - terraform-docs
+    #  - bash
+    #  - gnu-sed
+    #  - python@3.8
+    #  - the_silver_searcher
+    #  - fzf
+    #  - hub
+    #  - terminal-notifier
+    #  - tmux
+    #  - jq
+    #  - neovim
+    #  - terraform
+    #  - tree
+    #  - gsed
+    #  - htop
+    #  - antibody
 
 
-homebrew_cask_dir: /Applications
-casks:
-  - docker
-  - iterm2
-  - postman 
-  - slack
+casks: []
+  #  - docker
+  #  - iterm2
+  #  - postman 
+  #  - slack
   
+app_store: 
+  - 425424353   #The Unarchiver 
+  - 360593530   #Notability
+  - 747648890   #Telegram 
+  - 497799835   #Xcode

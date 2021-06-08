@@ -1,0 +1,4 @@
+- name: Installing Mac Appstore Apps
+  mas:
+    id: "{{app_store}}"
+    state: present
