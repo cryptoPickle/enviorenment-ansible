@@ -1,6 +1,8 @@
 - name: Setup Mac
   vars_files:
     - ./variables.yml
+  vars:
+    architecture: {ansible_architecture}
   hosts: all
   roles:
     - npm

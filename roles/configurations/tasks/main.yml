@@ -4,9 +4,22 @@
     creates: "/Users/{{lookup('env', 'USER')}}/.oh-my-zsh"
 
 
-
 - name: Set ZSH default shell
   shell: chsh -s $(which zsh) {{lookup('env', 'USER')}}
   args:
     creates: /bin/zsh
   become: true
+
+- name: "Create .zshrc configuration"
+  template:
+    src: "templates/{{item.name}}"
+    dest: "./test/{{item.output}}"
+    owner: "{{lookup('env', 'USER')}}"
+    force: yes
+  loop:
+    - name: .zshrc.j2
+      output: .zshrc
+    - name: .zsh_plugins.j2
+      output: .zsh_plugins
+    - name: fzf.zsh.j2
+      output: fzf.zsh

@@ -39,3 +39,8 @@ app_store:
   - 360593530   #Notability
   - 747648890   #Telegram 
   - 497799835   #Xcode
+
+zsh_plugins:
+  - zsh-users/zsh-syntax-highlighting
+  - denysdovhan/spaceship-prompt
+
