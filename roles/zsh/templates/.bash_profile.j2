@@ -1,0 +1,119 @@
+echo $1
+alias setupnpm="npm install -g gitinspector prettier react-devtools cute-stack npm-quick-run babel-cli eslint flow-bin graphql pm2 pure-prompt newman webpack webpack-cli";
+alias ws="open -a WebStorm";
+alias code="open -a Visual\ Studio\ Code";
+alias sub="open -a Sublime\ Text"
+alias ni='npm i';
+alias nr='npm run';
+alias g='hub'
+alias gs='g status';
+alias ga='g add';
+alias gc='g commit -m';
+alias gp='g push origin';
+alias pcat='pygmentize -f terminal256 -O style=native -g'
+alias dc='docker-compose'
+alias doc-kill-all='/Users/{{lookup('env','USER')}}/.scripts/docker_kill_all.sh'
+alias ya='yarn add'
+alias acmon="open -a Activity\ Monitor"
+alias cp="rsync -avz"
+alias gopro="load-project"
+alias goland="open -a GoLand"
+alias gitinit="gitinit"
+alias gitcont="g shortlog -s -n"
+alias gg="g grep"
+alias air-c="BluetoothConnector -c b8-f1-2a-c2-b1-ae -n"
+alias air-d="BluetoothConnector -d b8-f1-2a-c2-b1-ae -n"
+alias ggall="gitGrepAll"
+alias tag_realese="/Users/{{lookup('env','USER')}}/.scripts/tag_relase.sh"
+alias dynamo='docker run -d -p 8000:8000 amazon/dynamodb-local'
+alias set-aws='/Users/{{lookup('env','USER')}}/.scripts/set-aws.sh'
+alias uuid='uuidgen | tr "[:upper:]" "[:lower:]"'
+alias chrome="open -a 'Google Chrome'"
+alias vs="nvim -S .vim/Session.vim"
+alias vi="nvim"
+alias vim="nvim"
+alias backup="/Users/{{lookup('env','USER')}}/.scripts/regular-copy.sh"
+alias mux="tmuxinator"
+alias pro="~/.scripts/mux_fzf.sh"
+alias opac="~/.scripts/alacrittyop.sh"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+function gitinit(){
+  git config --global alias.ncm 'commit -a --allow-empty-message -m ""'
+  git config --global alias.lg 'log --graph --oneline --all'
+  git config --global blame.coloring highlightRecent
+  git config --global alias.cf 'status --porcelain'
+  git config --global core.pager less
+}
+
+function gitGrepAll(){
+      find . -type d -maxdepth 2 -name .git | while read line; do
+        (
+        cd $line/..
+        cwd=$(pwd)
+        echo "$(tput setaf 2)$cwd$(tput sgr0)"
+        git --no-pager grep --max-depth=4  -n "$@" 
+        )
+    done
+}
+
+load-project(){
+  if [ $# -eq 0 ] ; then
+    echo "🔮 Projects. Have fun 🥳  🎊 🚀"
+    cd /Users/{{lookup('env','USER')}}/Documents/Projects
+  elif [ $# -ne 0 ] ; then 
+    old="$IFS"
+    IFS="/"
+    goto="$*"
+    echo "🔮 $goto. Have fun 🥳  🎊 🚀"
+    cd /Users/{{lookup('env','USER')}}/Documents/Projects/"$goto"
+  fi
+}
+
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+
+
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+
+
+# For react-native android sdk
+export ANDROID_HOME=${HOME}/Library/Android/sdk
+export PATH=${PATH}:${ANDROID_HOME}/tools
+export PATH=${PATH}:${ANDROID_HOME}/platform-tools
+
+export PATH="$HOME/.cargo/bin:$PATH"
+export LANG=en_US.UTF-8
+
+
+# Setting ag as the default source for fzf
+export FZF_DEFAULT_COMMAND='ag -g ""'
+
+
+# To apply the command to CTRL-T as well
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+ [ -z "$ZSH_NAME" ] && [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[[ -s "/Users/{{lookup('env','USER')}}/.gvm/scripts/gvm" ]] && source "/Users/{{lookup('env','USER')}}/.gvm/scripts/gvm"
+export EDITOR="nvim"

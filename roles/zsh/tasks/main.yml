@@ -23,3 +23,5 @@
       output: .zsh_plugins
     - name: fzf.zsh.j2
       output: fzf.zsh
+    - name: .bash_profile.j2
+      output: .bash_profile

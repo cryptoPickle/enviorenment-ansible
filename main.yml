@@ -1,6 +1,6 @@
 - name: Setup Mac
   vars_files:
-    - ./variables.yml
+    - ./config.yml
   vars:
     architecture: {ansible_architecture}
   hosts: all
@@ -8,4 +8,4 @@
     - npm
     - homebrew
     - mas
-    - configurations
+    - zsh
