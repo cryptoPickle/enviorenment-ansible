@@ -1,0 +1,2 @@
+- name: Install Vim Plugins
+  shell: nvim +PlugInstall +qall >/dev/null 2>&1

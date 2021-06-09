@@ -1,0 +1,408 @@
+filetype plugin on
+
+call plug#begin('~/.config/nvim/plugged')
+{% for plugin in vim_plugs -%}
+Plug '{{plugin.name|default(plugin)}}' {% if plugin.do is defined %},{'do': '{{plugin.do}}' } {% endif %} 
+{% endfor %}
+call plug#end()
+
+syntax on
+set updatetime=100
+let g:go_auto_type_info = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+let g:gruvbox_guisp_fallback="bg"
+let g:gruvbox_contrast_dark='hard'
+colorscheme dracula
+autocmd VimEnter * hi Normal guibg=NONE ctermbg=NONE
+hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
+hi Visual  guifg=#000000 guibg=#B58901 gui=none
+set relativenumber
+set splitright
+set updatetime=100
+set hidden
+set nobackup
+set nowritebackup
+set termguicolors
+set shortmess+=c
+set signcolumn=yes
+set encoding=utf-8
+set t_Co=256
+set noerrorbells
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set nowrap
+set number
+set noshowmode
+set smartindent
+set cursorline
+hi cursorline cterm=none term=none
+autocmd WinEnter * setlocal cursorline
+autocmd WinLeave * setlocal nocursorline
+let g:gitgutter_async=0
+" airline status
+let g:airline_theme = "base16_spacemacs"
+let g:airline#extensions#tabline#buffer_idx_mode = 1
+" use powerline symbols (supported by the hack font family)
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#formatter = 'short_path'
+"terraform settings
+let g:terraform_align=1
+let g:terraform_fmt_on_save=1
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+set completeopt-=preview
+" set font for GUI vim
+if has("gui_running")
+    if has("win32")
+      set guifont=Hack:h9:cANSI:qDRAFT
+    else
+      set guifont=Hack\ 11
+    endif
+endif
+" ayu
+let ayucolor="dark"
+let g:airline#extensions#tabline#enabled = 1           " enable airline tabline                                                           
+let g:airline#extensions#tabline#show_close_button = 0 " remove 'X' at the end of the tabline                                            
+let g:airline#extensions#tabline#tabs_label = ''       " can put text here like BUFFERS to denote buffers (I clear it so nothing is shown)
+let g:airline#extensions#tabline#buffers_label = ''    " can put text here like TABS to denote tabs (I clear it so nothing is shown)      
+let g:airline#extensions#tabline#fnamemod = ':t'       " disable file paths in the tab                                                    
+let g:airline#extensions#tabline#show_tab_count = 0    " dont show tab numbers on the right                                                           
+let g:airline#extensions#tabline#show_buffers = 0      " dont show buffers in the tabline                                                 
+let g:airline#extensions#tabline#tab_min_count = 2     " minimum of 2 tabs needed to display the tabline                                  
+let g:airline#extensions#tabline#show_splits = 0       " disables the buffer name that displays on the right of the tabline               
+let g:airline#extensions#tabline#show_tab_nr = 0       " disable tab numbers                                                              
+let g:airline#extensions#tabline#show_tab_type = 0     " disables the weird ornage arrow on the tabline
+" fzf.vim
+let g:fzf_layout = { 'down': '~40%' }
+let g:fzf_preview_window = ''
+let g:fzf_preview_window = 'right:60%'
+" hclfmt
+let g:hcl_fmt_autosave = 1
+let g:tf_fmt_autosave = 1
+let g:nomad_fmt_autosave = 1
+let $FZF_DEFAULT_COMMAND = 'ag --hidden --ignore .git -l -g ""'
+" go
+let g:go_fmt_command = "goimports"
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_chan_whitespace_error = 0
+let g:go_highlight_extra_types = 0
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
+
+" horizon
+let g:lightline = {'colorscheme' : 'gruvbox'}
+
+" nerdcommenter
+let g:NERDSpaceDelims = 1
+let g:NERDCompactSexyComs = 1
+let g:NERDTrimTrailingWhitespace = 1
+
+" Let definitions
+let mapleader = " "
+
+" prettier
+let g:prettier#config#bracket_spacing = 'true'
+let g:prettier#config#jsx_bracket_same_line = 'false'
+let g:prettier#autoformat = 0
+autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue PrettierAsync
+
+" graphql
+au BufNewFile,BufRead *.prisma setfiletype graphql
+
+" vim-jsx
+autocmd BufRead,BufNewFile *.tsx setlocal syntax=javascript.jsx
+
+" Basic remaps.  This is where the magic of vim happens
+nmap <leader>h :wincmd h<CR>
+nmap <leader>j :wincmd j<CR>
+nmap <leader>k :wincmd k<CR>
+nmap <leader>l :wincmd l<CR>
+nmap <leader>u :UndotreeShow<CR>
+nmap <C-p> :Files<CR>
+nmap <C-g> :Ag<CR>
+
+" go
+au FileType go nmap <leader>rv <Plug>(go-run-vertical)
+
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+
+nnoremap <leader>n :NERDTreeToggle<CR>
+nnoremap <leader>N :NERDTreeFind<CR>
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <silent> gr <Plug>(coc-references)
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+:tnoremap <Esc> <C-\><C-n>
+
+" Introduce function text object
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}%{ObsessionStatus()}
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>=
+function! s:my_fzf_handler(lines) abort
+  if empty(a:lines)
+    return
+  endif
+  let cmd = get({ 'ctrl-t': 'tabedit',
+                \ 'ctrl-s': 'split',
+                \ 'ctrl-x': 'vsplit' }, remove(a:lines, 0), 'e')
+  for item in a:lines
+    execute cmd escape(item, ' %#\')
+  endfor
+endfunction
+
+nnoremap <silent> <leader>f :call fzf#run({
+  \ 'options': '--expect=ctrl-t,ctrl-x,ctrl-v',
+  \Tab_trigger 'up':      '40%',
+  \ 'sink*':   function('<sid>my_fzf_handler')})<cr>
+
+
+nnoremap <Leader>t :tabnew<CR>
+" Terminal go back to normal mode
+tnoremap <Esc> <C-\><C-n>
+tnoremap :q! <C-\><C-n>:q!<CR>
+
+
+nnoremap <silent><Leader>] :vertical resize +5 <CR>
+nnoremap <silent><Leader>[ :vertical resize -5 <CR>
+
+nnoremap <leader>sv <C-w>v
+nnoremap <leader>sx <C-w>s
+map <leader>bn :bn<cr>
+map <leader>bp :bp<cr>
+map <leader>bd :bd<cr>
+"Vim files
+
+command! Reload execute "source ~/.config/nvim/init.vim"
+command! Config execute ":e ~/.config/nvim/init.vim"
+command! Profile execute ":e ~/.bash_profile"
+command! Ter execute ":below split | resize 60 | :ter"
+
+
+
+
+"Rename
+
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'), 'file')
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+map <leader>r :call RenameFile()<cr>
+
+
+vmap '' :w !pbcopy<CR><CR>
+
+command! Rs execute ":Obsession"
+
+
+" Trigger configuration. You need to change this to something else than <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "my_snippets"]
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+map <leader>p :FZF<cr>
+map <leader>g :Ag<cr>
+noremap <Left> <Nop>
+
+noremap <Right> <Nop>
+
+noremap <Up> <Nop>
+
+noremap <Down> <Nop>
+
+
+
+"-- AUTOCLOSE --
+"autoclose and position cursor to write text inside
+inoremap ' ''<left>
+inoremap ` ``<left>
+inoremap " ""<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+"autoclose with ; and position cursor to write text inside
+inoremap '; '';<left><left>
+inoremap `; ``;<left><left>
+inoremap "; "";<left><left>
+inoremap (; ();<left><left>
+inoremap [; [];<left><left>
+inoremap {; {};<left><left>
+"autoclose with , and position cursor to write text inside
+inoremap ', '',<left><left>
+inoremap `, ``,<left><left>
+inoremap ", "",<left><left>
+inoremap (, (),<left><left>
+inoremap [, [],<left><left>
+inoremap {, {},<left><left>
+"autoclose and position cursor after
+inoremap '<tab> ''
+inoremap `<tab> ``
+inoremap "<tab> ""
+inoremap (<tab> ()
+inoremap [<tab> []
+inoremap {<tab> {}
+"autoclose with ; and position cursor after
+inoremap ';<tab> '';
+inoremap `;<tab> ``;
+inoremap ";<tab> "";
+inoremap (;<tab> ();
+inoremap [;<tab> [];
+inoremap {;<tab> {};
+"autoclose with , and position cursor after
+inoremap ',<tab> '',
+inoremap `,<tab> ``,
+inoremap ",<tab> "",
+inoremap (,<tab> (),
+inoremap [,<tab> [],
+inoremap {,<tab> {},
+"autoclose 2 lines below and position cursor in the middle 
+inoremap '<CR> '<CR>'<ESC>O
+inoremap `<CR> `<CR>`<ESC>O
+inoremap "<CR> "<CR>"<ESC>O
+inoremap (<CR> (<CR>)<ESC>O
+inoremap [<CR> [<CR>]<ESC>O
+inoremap {<CR> {<CR>}<ESC>O
+"autoclose 2 lines below adding ; and position cursor in the middle 
+inoremap ';<CR> '<CR>';<ESC>O
+inoremap `;<CR> `<CR>`;<ESC>O
+inoremap ";<CR> "<CR>";<ESC>O
+inoremap (;<CR> (<CR>);<ESC>O
+inoremap [;<CR> [<CR>];<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+"autoclose 2 lines below adding , and position cursor in the middle 
+inoremap ',<CR> '<CR>',<ESC>O
+inoremap `,<CR> `<CR>`,<ESC>O
+inoremap ",<CR> "<CR>",<ESC>O
+inoremap (,<CR> (<CR>),<ESC>O
+inoremap [,<CR> [<CR>],<ESC>O
+inoremap {,<CR> {<CR>},<ESC>O
+
+
+" Fugitive Conflict Resolution
+nnoremap <leader>gd :Gvdiffsplit!<CR>
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
+
+
+:let b:is_bash=1
+:set ft=sh
+
+let g:rbpt_max = 16
+let g:rbpt_loadcmd_toggle = 0
+
+nmap ga <Plug>(EasyAlign)
+xmap ga <Plug>(EasyAlign)
+lua require'colorizer'.setup()
+highlight Normal ctermbg=256 guibg=#262626
+highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE

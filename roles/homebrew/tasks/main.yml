@@ -1,7 +1,14 @@
-
 - name: Check Homebrew is installed
   stat: path=/usr/local/bin/brew
   register: brew
+
+- name: Homebrew Taps
+  homebrew_tap:
+    name: "{{item.name | default(item)}}"
+    state: "{{item.state | default('present')}}"
+    url: "{{item.url | default(omit)}}"
+  ignore_errors: yes
+  with_items: "{{taps}}"
 
 - name: Install Homebrew
   shell: ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
@@ -12,16 +19,8 @@
   homebrew:
     name: "{{item.name | default(item)}}"
     state: "{{item.state | default('present')}}"
+  ignore_errors: yes
   with_items: "{{brews}}"
-
-
-- name: Homebrew Taps
-  homebrew_tap:
-    name: "{{item.name | default(item)}}"
-    state: "{{item.state | default('present')}}"
-    url: "{{item.url | default(omit)}}"
-  with_items: "{{taps}}"
-
 
 - name: HomeBrew Casks
   homebrew_cask:

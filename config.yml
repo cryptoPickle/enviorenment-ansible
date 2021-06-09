@@ -4,7 +4,11 @@ npm:
 taps:
   - homebrew/core
   - homebrew/cask
-
+  - homebrew/cask-drivers
+  - homebrew/cask-fonts
+  - jeromegamez/formulae
+  - github/gh
+  - aws/tap
 brews:
   - htop
     #  - mas
@@ -29,10 +33,10 @@ brews:
 
 
 casks: []
-  #  - docker
-  #  - iterm2
-  #  - postman 
-  #  - slack
+#   - docker
+#   - iterm2
+#   - postman 
+#   - slack
   
 app_store: 
   - 425424353   #The Unarchiver 
@@ -44,3 +48,48 @@ zsh_plugins:
   - zsh-users/zsh-syntax-highlighting
   - denysdovhan/spaceship-prompt
 
+vim_plugs:
+  - airblade/vim-gitgutter
+  - norcalli/nvim-colorizer.lua
+  - junegunn/vim-easy-align
+  - flazz/vim-colorschemes
+  - ayu-theme/ayu-vim
+  - sheerun/vim-polyglot
+  - name: junegunn/fzf 
+    do: ./install --bin 
+  - name: neoclide/coc.nvim 
+    do: yarn install --frozen-lockfile
+  - junegunn/fzf.vim
+  - prettier/vim-prettier
+  - mbbill/undotree
+  - jparise/vim-graphql
+  - mxw/vim-jsx
+  - name: fatih/vim-go 
+    do: :GoUpdateBinaries 
+  - mhinz/vim-signify
+  - tpope/vim-fugitive
+  - scrooloose/nerdcommenter
+  - b4b4r07/vim-hcl
+  - ekalinin/dockerfile.vim
+  - vim-airline/vim-airline
+  - vim-airline/vim-airline-themes
+  - christoomey/vim-tmux-navigator
+  - tiagofumo/vim-nerdtree-syntax-highlight
+  - ryanoasis/vim-devicons
+  - jremmen/vim-ripgrep
+  - tpope/vim-obsession
+  - SirVer/ultisnips
+  - tpope/vim-surround
+  - hashivim/vim-terraform
+  - vim-syntastic/syntastic
+  - juliosueiras/vim-terraform-completion
+  - rizzatti/dash.vim
+  - dracula/vim
+
+tmux_plugs:
+  - tmux-plugins/tmux-sensible
+  - wfxr/tmux-fzf-url
+  - dracula/tmux
+  - schasse/tmux-jump
+  - tmux-plugins/tmux-resurrect
+  - tmux-plugins/tmux-yank
