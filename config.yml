@@ -1,5 +1,6 @@
 npm:
   - jest
+  - neovim
 
 taps:
   - homebrew/core
@@ -11,6 +12,7 @@ taps:
   - aws/tap
 brews:
   - htop
+  - dockutil
     #  - mas
     #  - awscli
     #  - ripgrep
@@ -93,3 +95,13 @@ tmux_plugs:
   - schasse/tmux-jump
   - tmux-plugins/tmux-resurrect
   - tmux-plugins/tmux-yank
+
+macos_dock:
+  remove:
+    - Contacts
+    - Notes
+    - FaceTime
+    - iTunes
+    - iBooks
+    - App Store
+    - Calendar
