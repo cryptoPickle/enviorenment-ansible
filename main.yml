@@ -5,10 +5,10 @@
     architecture: {ansible_architecture}
   hosts: all
   roles:
-    # - npm
     - homebrew
-    # - mas
-    # - zsh
-    # - tmux
-    # - vim
+    - npm
+    - mas
+    - zsh
+    - tmux
+    - vim
     - dock

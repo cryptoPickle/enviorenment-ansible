@@ -1,30 +1,41 @@
-- name: Check Homebrew is installed
-  stat: path=/usr/local/bin/brew
-  register: brew
+- name: Check if homebrew binary is already in place.
+  stat: "path={{ homebrew_brew_bin_path }}/brew"
+  register: homebrew_binary
+  check_mode: false
 
-- name: Homebrew Taps
+- name: Symlink brew to homebrew_brew_bin_path.
+  file:
+    src: "{{ homebrew_install_path }}/bin/brew"
+    dest: "{{ homebrew_brew_bin_path }}/brew"
+    state: link
+  when: not homebrew_binary.stat.exists
+  become: true
+
+
+- name: Force update brew after installation.
+  command: "{{ homebrew_brew_bin_path }}/brew update --force"
+  when: not homebrew_binary.stat.exists
+
+# Tap.
+- name: Ensure configured taps are tapped.
   homebrew_tap:
-    name: "{{item.name | default(item)}}"
-    state: "{{item.state | default('present')}}"
-    url: "{{item.url | default(omit)}}"
+    tap: '{{ item.name | default(item) }}'
+    url: '{{ item.url | default(omit) }}'
+    state: present
+  loop: "{{ taps }}"
   ignore_errors: yes
-  with_items: "{{taps}}"
 
-- name: Install Homebrew
-  shell: ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-  when: not brew.stat.exists
-  
-
-- name: Install Homebrew Packages
-  homebrew:
-    name: "{{item.name | default(item)}}"
-    state: "{{item.state | default('present')}}"
-  ignore_errors: yes
-  with_items: "{{brews}}"
-
-- name: HomeBrew Casks
+- name: Install configured cask applications.
   homebrew_cask:
-    name: "{{item.name | default(item)}}"
-    state: "{{item.state | default('present')}}"
+    name: "{{ item.name | default(item) }}"
+    state: present
+  loop: "{{ casks }}"
   ignore_errors: yes
-  with_items: "{{casks}}"
+
+- name: Ensure configured homebrew packages are installed.
+  homebrew:
+    name: "{{ item.name | default(item) }}"
+    state: present
+  loop: "{{ brews }}"
+  ignore_errors: yes
+
