@@ -106,3 +106,8 @@ macos_dock:
     - iBooks
     - App Store
     - Calendar
+  add:
+    - Slack
+    - Pages
+    - Docker
+    - Test
