@@ -107,7 +107,13 @@ macos_dock:
     - App Store
     - Calendar
   add:
-    - Slack
-    - Pages
-    - Docker
-    - Test
+    - name: Safari
+      position: 2
+    - name: Google Chrome
+      position: 3
+    - name: Slack
+      position: 5
+    - name: iTerm
+      position: 6
+    - name: Jira
+      position: 7

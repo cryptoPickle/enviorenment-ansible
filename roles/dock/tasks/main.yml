@@ -1,18 +1,15 @@
-- name: Remove Items From Dock
-  shell: dockutil --remove '{{ item }}'
-  ignore_errors: true
-  with_items: "{{macos_dock.remove}}"
+- name: Add Dock Items
+  ansible.builtin.include_tasks: add.yml
+  loop: "{{ macos_dock.add }}"
 
-- name: "See if Dock item exists."
-  ansible.builtin.command: "dockutil --find '{{ item.name | default(item) }}'"
-  register: dockitem_exists
-  failed_when: >
-    "No such file or directory" in dockitem_exists.stdout
-    or "command not found" in dockitem_exists.stdout
-  with_items: "{{macos_dock.add}}"
 
-- name: Add to dock
-  shell: dockutil --add '/Applications/{{item}}.app'
-  when: dockitem_exists.results[0].rc >0
-  with_items: "{{macos_dock.add}}"
+- name: Remove Dock Items
+  ansible.builtin.include_tasks: remove.yml
+  loop: "{{ macos_dock.remove }}"
 
+- name: Move positions
+  ansible.builtin.include_tasks: position.yml
+  when:
+    - item.position is defined
+    - item.position > 0
+  loop: "{{macos_dock.add}}"
