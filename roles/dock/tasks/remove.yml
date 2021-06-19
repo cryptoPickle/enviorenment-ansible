@@ -1,0 +1,3 @@
+- name: Remove Items From Dock
+  ansible.builtin.command: dockutil --remove '{{ item }}'
+  ignore_errors: true

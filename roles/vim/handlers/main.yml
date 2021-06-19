@@ -1,2 +1,15 @@
 - name: Install Vim Plugins
   shell: nvim +PlugInstall +qall >/dev/null 2>&1
+  notify: Install coc-tsserver
+
+- name: Install coc-tsserver
+  shell: nvim +CocInstall\ coc-tsserver +qall >/dev/null 2>&1
+  notify: Copy COC Settings
+
+- name: Copy COC Settings
+  copy:
+    src: templates/coc-settings.json
+    dest: "/Users/{{lookup('env', 'USER')}}/.config/nvim"
+    owner: "{{lookup('env', 'USER')}}"
+    backup: yes
+
