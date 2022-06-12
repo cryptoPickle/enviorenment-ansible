@@ -8,7 +8,7 @@
 - name: TMUX config
   template:
     src: "templates/{{item.name}}"
-    dest: "./test/{{item.output}}"
+    dest: "~/{{item.output}}"
     owner: "{{lookup('env', 'USER')}}"
     force: yes
   notify:

@@ -13,7 +13,7 @@
 - name: "Create .zshrc configuration"
   template:
     src: "templates/{{item.name}}"
-    dest: "./test/{{item.output}}"
+    dest: "~/{{item.output}}"
     owner: "{{lookup('env', 'USER')}}"
     force: yes
   loop:

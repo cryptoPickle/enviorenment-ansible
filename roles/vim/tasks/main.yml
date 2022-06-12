@@ -10,7 +10,7 @@
 - name: Vim Init
   template:
     src: "templates/{{item.name}}"
-    dest: "./test/{{item.output}}"
+    dest: "~/.config/nvim/{{item.output}}"
     owner: "{{lookup('env', 'USER')}}"
     force: yes
   notify:
